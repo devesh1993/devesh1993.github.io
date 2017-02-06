@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	
+	
+	<title>Donate page</title>
+	
+	<script type="text/javascript">
+		var total_amount = 1000;
+		var present_amount = 0;
+	
+		function add_amount() {
+			var amount_donated = parseInt(document
+					.getElementById("donation_amount").value);
+			console.log("present amount:"
+					+ document.getElementById("donation_amount").value);
+			present_amount = present_amount + amount_donated;
+			if (present_amount > total_amount) {
+				alert("Donation of " + total_amount
+						+ " accepted and Target Achieved ! Thanks for contribution");
+				present_amount = total_amount;
+				load_data();
+			}
+			else
+			{
+				alert("Donated " + amount_donated + " collected amount "
+					+ present_amount);
+				load_data();
+			}
+			
+		}
+	
+		function change_progress() {
+			var progress_bar_completion = (present_amount / total_amount) * 450;
+			if(present_amount==0)
+			{
+				progress_bar_completion = 5;
+			}
+			document.getElementById("progress_bar_completion").style.borderLeftWidth = progress_bar_completion
+					+ "px";
+			
+		}
+		function load_data() {
+			if(total_amount==present_amount)
+			{
+				document.getElementById("required_amount").innerHTML = "Target achieved ! Thank you !"
+			}
+			else
+			{
+				document.getElementById("required_amount").innerHTML = (total_amount - present_amount)
+					+ "$ still needed for project";
+			}
+			change_progress();
+		}
+	</script>
+	
+	</head>
+	<body onload="load_data()">
+		
+		<div style="border-radius: 20px; margin-right:30%; margin-left:30%; margin-top:5%; border-style: ridge; width: 500px; height: 450px;">
+			<div align="center"
+				style="background-color: black; width: 80%; height:60px; margin-left:10%; margin-right:10%; font-size: xx-large; border-radius: 8px;">
+				<p align="center" id="required_amount" style="color: white;"></p>
+	
+			</div>
+			<br />
+			<div >
+				<div id="progress_bar_completion" align="left"
+					style="background: white; margin-left:5%; margin-right:5%; border-bottom-style:outset; border-right-style:outset;
+					border-top-style:outset ; border-left-width:10px;
+					  border-left-color:red; border-left-style:solid; height: 20px;"></div>
+	
+				<br />
+				
+				<font style="color: red; font-size:x-large; margin-left: 10%;" ><B>Only 3 days left</B></font> <font style="color: black; font-size:x-large; margin-left:1%; margin-right: 10%;">  to fund this project </font>
+				<p style="color: black; font-size:x-large; margin-left: 10%; margin-right: 10%;"> Join 42 other donors who have already supported this project. Every dollar helps. </p>
+				<br />
+				<div align="center">
+					<font style="font-size: x-large;  margin-left: 10%;"><b>|</b>$ </font>
+					<input type="text" style=" height:40px; font-size:100%; border-radius: 2px;" id=donation_amount>
+					<button onclick="add_amount()"
+						style="width:20%; height:10%; border-radius: 2px; background-color:green;">
+						<p style="color: white; font-size: large; font-weight: bold;">Give Now</p></button>
+				</div>
+				<a href="" style="font-size: x-large;  margin-left: 10%;"> Why $50?</a>
+			</div>
+	
+		</div>
+		<br/>
+		<div  style="border-radius: 20px; margin-right:30%; margin-left:30%;">
+		<button onclick=""
+						style="width:45%; height:10%; border-radius: 10px; background-color:white;">
+						<p style="color: maroon; font-size: large; font-weight: bold;">SAVE FOR LATER</p></button>
+		<button onclick=""
+						style="width:45%; height:10%; border-radius: 10px; background-color:white;">
+						<p style="color: maroon; font-size: large; font-weight: bold;">TELL YOUR FRIENDS</p></button>
+		</div>
+	</body>
+</html>
