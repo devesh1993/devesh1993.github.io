@@ -7,31 +7,57 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin-left: 10%;
+    width: 80%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+</style>
+<script type="text/javascript">
+function displayToggle( div_id) {
+    var x = document.getElementById(div_id);
+    console.log("style display "+ x.style.display);
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
+</script>
 </head>
 <body>
 <%
-String m_title = request.getParameter("movie_title");
-if(m_title==null)
-{
-	out.println("<center><h2>Saved favorites movies details on OMDB : </h2></center>");
-}
-else
-{
+
 	ArrayList<Movie> movies = new ArrayList<Movie>();
 	movies = Utilities.readFavorites();
+	int i =0;
+	out.println("<center><h2>Saved favorites movies details on OMDB are: </h2></center>");
 	for(Movie movie_details : movies )
 	{
-		
+		i++;
 	if(movie_details==null || movie_details.getTitle()==null)
 	{
 		out.println("Something wrong while retrival");
 	}
 	else
 	{
-		out.println("<center><h2>Saved favorites movies details on OMDB : </h2></center>");
+		
 	%>
-	<center><h2><B>Saved Details for "<%=m_title %>"</B></h2></center>
-	<table>
+	<h3><B>Details for <button style="border-radius: 10px; background-color: white; height: 55px;" onclick="displayToggle(<%=i%>)"><p style="color: maroon; font-size: large; font-weight: bold;">"<%=movie_details.getTitle() %>"</p></button></B></h3>
+	<table style="display: none;" id=<%=i%>>
 	<tr>
 	<th>Field</th>
 	<th>Value</th>
@@ -101,7 +127,7 @@ else
 	<%
 	}
 	}
-}
+
 %>
 </body>
 </html>

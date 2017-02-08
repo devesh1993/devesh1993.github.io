@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -43,7 +44,7 @@ public class Utilities {
 
 			@SuppressWarnings("resource")
 			DefaultHttpClient httpClient = new DefaultHttpClient();
-			String request_url = "http://www.omdbapi.com/?t="+ inp_title +"&y=&plot=short&r=json";
+			String request_url = "http://www.omdbapi.com/?t="+ URLEncoder.encode(inp_title, "UTF-8") +"&y=&plot=short&r=json";
 			HttpGet getRequest = new HttpGet(request_url);
 			getRequest.addHeader("accept", "application/json");
 
@@ -105,11 +106,13 @@ public class Utilities {
         Type type = new TypeToken<Movie>() {}.getType();
 		String json = gson.toJson(m, type);
 		
-		String file_name = "added_fav_movies.json";
+		String file_name ="C:\\Users\\Devesh\\Desktop\\Company\\Eclipse\\eclipse\\"+ "added_fav_movies.json";
+		
 		File file = new File(file_name);
-
+		
 		// if file doesn't exists, then create it
 		if (!file.exists()) {
+			
 			file.createNewFile();
 		}
 
@@ -119,9 +122,11 @@ public class Utilities {
 		
 		if(!existFavorites(m.getTitle(),file_name))
 		{
-			bw.write(m.getTitle() + ":=\n" + json);
+			System.out.println("writing data finally***********");
+			bw.write(m.getTitle() + ":=\n" + json + "\n");
 		}
         System.out.println(json);
+        bw.close();
 	}
 	
 	private static boolean existFavorites(String title, String file_name) throws IOException {
@@ -144,7 +149,7 @@ public class Utilities {
 	public static ArrayList<Movie> readFavorites() throws IOException
 	{
 		ArrayList<Movie> movie_list = new ArrayList<Movie>();
-		String file_name = "added_fav_movies.json";
+		String file_name = "C:\\Users\\Devesh\\Desktop\\Company\\Eclipse\\eclipse\\"+"added_fav_movies.json";
 		File file = new File(file_name);
 		FileReader fw = new FileReader(file.getAbsoluteFile());
 		@SuppressWarnings("resource")
@@ -176,6 +181,7 @@ public class Utilities {
 				movie_list.add(m);
 			}
 		}
+		br.close();
 		return movie_list;
 	}
 	
@@ -191,6 +197,6 @@ public class Utilities {
 	
 	public static void main(String[] args) throws HttpException, IOException
 	{
-		Utilities.search_get_movie_detail("");
+		Utilities.readFavorites();
 	}
 }
