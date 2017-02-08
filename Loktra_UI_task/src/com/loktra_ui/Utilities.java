@@ -106,7 +106,7 @@ public class Utilities {
         Type type = new TypeToken<Movie>() {}.getType();
 		String json = gson.toJson(m, type);
 		
-		String file_name ="C:\\Users\\Devesh\\Desktop\\Company\\Eclipse\\eclipse\\"+ "added_fav_movies.json";
+		String file_name = "added_fav_movies.json";
 		
 		File file = new File(file_name);
 		
@@ -122,7 +122,7 @@ public class Utilities {
 		
 		if(!existFavorites(m.getTitle(),file_name))
 		{
-			System.out.println("writing data finally***********");
+			System.out.println("writing data");
 			bw.write(m.getTitle() + ":=\n" + json + "\n");
 		}
         System.out.println(json);
@@ -149,7 +149,7 @@ public class Utilities {
 	public static ArrayList<Movie> readFavorites() throws IOException
 	{
 		ArrayList<Movie> movie_list = new ArrayList<Movie>();
-		String file_name = "C:\\Users\\Devesh\\Desktop\\Company\\Eclipse\\eclipse\\"+"added_fav_movies.json";
+		String file_name ="added_fav_movies.json";
 		File file = new File(file_name);
 		FileReader fw = new FileReader(file.getAbsoluteFile());
 		@SuppressWarnings("resource")
